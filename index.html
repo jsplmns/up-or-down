@@ -10,9 +10,40 @@
 
 <body>
 
-  
-  <script src="main.js"></script>
-  <script src="game.js"></script>
+  <main id="site-main" class="game">
+
+    <header id="site-header" class="header-bar">
+      <div class="score">
+        <span class="label">Score:</span>
+        <span class="value">203</span>
+      </div>
+      <div class="timer">
+        <span class="label">Time left:</span>
+        <span class="value">3</span>
+      </div>
+    </header>
+
+    <div class="game-cards">
+      <div class="currentCard card">
+        <span>5</span>
+      </div>
+      <div class="actions">
+        <button class="up">up</button>
+        <button class="down">down</button>
+      </div>
+      <div class="nextCard card">
+        <span>2</span>
+      </div>
+    </div>
+
+    <footer id="site-footer">
+      <p>Step: <span class="step-no">1</span> / <span class="total-steps">51</span></p>
+    </footer>
+
+  </main>
+
+  <!-- <script src="main.js"></script>
+  <script src="game.js"></script> -->
 </body>
 
 </html>

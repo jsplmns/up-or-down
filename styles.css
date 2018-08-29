@@ -37,16 +37,19 @@ p {
 
 /* ---- layout ---- */
 
+body, html {
+  height: 100%;
+}
+
 #site-header {
   padding: 30px 0;
-  color: white;
-  background: #111;
+  color: rgb(172, 54, 54);
 }
 
 #site-footer {
-  color: white;
-  padding: 60px 0;
-  background: #111;
+  color: rgb(14, 14, 14);
+  padding: 20px 0;
+  text-align: center;
 }
 
 #site-main {
@@ -74,24 +77,80 @@ p {
 
 /* ---- components ---- */
 
-.button {
-  width: 100%;
-  background-color: blue;
-  color: #fff;
-  border: 1px solid #fff
+
+.game {
+  margin: 0 30px;
+  height: 100%;
 }
 
-.button-alt {
-  color: blue;
-  background-color: #fff;
+.game .header-bar{
+  display: flex;
+
 }
 
-/* ---- section ---- */
+.game .score {
+  flex: 50%;
 
-section.testimonials {
-   /* ... */
 }
 
-section.testimonials .button {
-  margin-bottom: 10px;
+.game .timer {
+
 }
+
+.game .label {
+
+}
+
+.game .value {
+
+}
+
+.game div.game-cards {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 0;
+}
+
+.game .card {
+  border: 1px solid #979797;
+  background-color: #ffb968;
+  text-align: center;
+}
+
+.game .currentCard {
+  flex: 30%;
+}
+
+.game .actions {
+  flex: 30%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.game .up {
+
+}
+
+.game .down {
+
+}
+
+.game .nextCard {
+  flex: 30%;
+}
+
+.game button {
+  border: 1px solid #979797;
+  flex: 1;
+  margin: 10px;
+}
+
+.game .step-no {
+
+}
+
+.game .total-steps {
+
+}
+
