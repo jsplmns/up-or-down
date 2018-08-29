@@ -21,7 +21,7 @@ function main() {
 
   function buildSplash() {
     splashMain = buildDom(
-      `<main class="game">
+      `<main class="start-screen">
         <h1>up or down</h1>
         <button>Start</button>
       </main>`
@@ -52,7 +52,7 @@ function main() {
     game = new Game();
     game.start();
     game.onOver(function () {
-      gameOver();
+      gameOver(game.score);
     });
 
   }
@@ -69,19 +69,17 @@ function main() {
 
     // show score and button
 
-  function gameOver() {
+  function gameOver(score) {
     destroyGame();
-    buildGameOver();
+    buildGameOver(score);
   }
   
-  // todo score
-  var score = 90;
 
-  function buildGameOver() {
+  function buildGameOver(score) {
     gameOverMain = buildDom(
-      `<main class="game">
-        <h1>game over sucker!!!</h1>
-        <p>Your score is ` + score +`</p>
+      `<main class="end-screen">
+        <h1>game over!!!</h1>
+        <p>Your score was ` + score +`</p>
         <button>Restart</button>
       </main>`
     );

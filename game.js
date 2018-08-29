@@ -16,26 +16,32 @@ Game.prototype.start = function () {
     ` <main id="site-main" class="game">
 
         <header id="site-header" class="header-bar">
-          <div class="score">
-            <span class="label">Score:</span>
+          <div class="timer">
+            <span class="label">Time left:</span><br>
             <span class="value"></span>
           </div>
-          <div class="timer">
-            <span class="label">Time left:</span>
-            <span class="value"></span>
+          <div class="score">
+            <span class="label">Score:</span><br>
+            <span class="value">0</span>
           </div>
         </header>
 
         <div class="game-cards">
-          <div class="currentCard card">
-            <span></span>
+          <div class="currentCard">
+            <div class="card">
+              <span></span>
+            </div>
           </div>
-          <div class="actions">
-            <button class="up">up</button>
-            <button class="down">down</button>
+          <div class="buttons">
+            <div class="actions">
+              <button class="up">up</button>
+              <button class="down">down</button>
+            </div>
           </div>
-          <div class="nextCard card">
-            <span></span>
+          <div class="nextCard">
+            <div class="card">
+              <span></span>
+            </div>
           </div>
         </div>
 
@@ -49,8 +55,8 @@ Game.prototype.start = function () {
   self.scoreElement = self.gameMain.querySelector('.score .value');
   self.timeLeftElement = self.gameMain.querySelector('.timer .value');
   
-  self.currentCardElement = self.gameMain.querySelector('.currentCard');
-  self.nextCardElement = self.gameMain.querySelector('.nextCard');
+  self.currentCardElement = self.gameMain.querySelector('.currentCard .card');
+  self.nextCardElement = self.gameMain.querySelector('.nextCard .card');
 
   self.buttonUpElement = self.gameMain.querySelector('.up');
   self.buttonDownElement = self.gameMain.querySelector('.down');
@@ -67,6 +73,8 @@ Game.prototype.start = function () {
 
 Game.prototype.showFirstCard = function () {
   var self = this;
+
+  self.totalStepsElement.innerText = self.card.length - 1;
   
   self.step = 0
   self.showCard();
@@ -102,9 +110,12 @@ Game.prototype.showCard = function () {
   self.currentCardElement.innerText = currentCard;
   self.nextCardElement.innerText = '?';
 
+  self.stepNoElement.innerText = self.step + 1;
+
   self.handleClickUp = function () {
     self.revealNumber(true);
-  }
+  };
+
   self.buttonUpElement.addEventListener('click', self.handleClickUp);
   self.buttonUpElement.removeAttribute('disabled');
 
@@ -137,30 +148,44 @@ Game.prototype.revealNumber = function (answerWasUp) {
   var self = this;
 
   clearInterval(self.intervalID);
-  self.buttonUpElement.removeEventListener('click', handleClickUp);
+  self.buttonUpElement.removeEventListener('click', self.handleClickUp);
   self.buttonUpElement.setAttribute('disabled', 'disabled');
-  self.buttonDownElement.removeEventListener('click', handleClickDown);
+  self.buttonDownElement.removeEventListener('click', self.handleClickDown);
   self.buttonDownElement.setAttribute('disabled', 'disabled');
 
 
-  var currentCard = self.cards[self.step];
-  var nextCard = self.cards[self.step +1];
+  var currentCard = self.card[self.step];
+  var nextCard = self.card[self.step +1];
+
+  var className = '';
   
   if (answerWasUp && nextCard > currentCard) {
     self.score++;
+    className = 'correct';
+    console.log('score added & class correct added')
   } else if (answerWasUp && nextCard < currentCard) {
     self.score--;
+    className = 'incorrect';
+    console.log('score retracted & class incorrect added')
   } else if (!answerWasUp && nextCard < currentCard) {
     self.score++;
-  } else if (!answerWasUp && nextCard < currentCard) {
+    className = 'correct';
+    console.log('score added & class correct added')
+  } else if (!answerWasUp && nextCard > currentCard) {
     self.score--;
+    className = 'incorrect';
+    console.log('score retracted & class incorrect added')
   }
 
   self.scoreElement.innerText = self.score
 
+  self.nextCardElement.classList.add(className);
   self.nextCardElement.innerText = nextCard;
 
-
+  setTimeout(function () {
+    self.nextCardElement.classList.remove(className);
+    self.nextCard();
+  }, 2000);
 };
 
 
