@@ -12,9 +12,11 @@ function main() {
   // --- SPLASH ---
 
   var splashMain;
-  var gameMain;
   var gameOverMain;
   
+  var game;
+
+
   // create Splash
 
   function buildSplash() {
@@ -47,13 +49,8 @@ function main() {
 
     // temporary
 
-    gameMain = buildDom(
-      `<main>
-        <h1>this is the game - lol</h1>
-      </main>`
-    );
-    
-    document.body.appendChild(gameMain);
+    game = new Game();
+    game.start();
 
     window.setTimeout(function() {
       gameOver();
@@ -62,7 +59,7 @@ function main() {
   };
 
   function destroyGame() {
-    gameMain.remove();
+    game.destroy();
   };
 
   
