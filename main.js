@@ -21,7 +21,7 @@ function main() {
 
   function buildSplash() {
     splashMain = buildDom(
-      `<main>
+      `<main class="game">
         <h1>up or down</h1>
         <button>Start</button>
       </main>`
@@ -33,7 +33,7 @@ function main() {
     // adding function to Start Button
     var button = document.querySelector('button');
     button.addEventListener('click', startGame);
-  };
+  }
 
   // destroy Splash
 
@@ -51,16 +51,15 @@ function main() {
 
     game = new Game();
     game.start();
-
-    window.setTimeout(function() {
+    game.onOver(function () {
       gameOver();
-    }, 3000);
+    });
 
-  };
+  }
 
   function destroyGame() {
     game.destroy();
-  };
+  }
 
   
 
@@ -73,14 +72,14 @@ function main() {
   function gameOver() {
     destroyGame();
     buildGameOver();
-  };
+  }
   
   // todo score
   var score = 90;
 
   function buildGameOver() {
     gameOverMain = buildDom(
-      `<main>
+      `<main class="game">
         <h1>game over sucker!!!</h1>
         <p>Your score is ` + score +`</p>
         <button>Restart</button>
@@ -95,7 +94,7 @@ function main() {
   }
 
   function destroyGameOver() {
-  if (gameOverMain) {
+    if (gameOverMain) {
       gameOverMain.remove();
     }
   }
